@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import Player from './components/Player';
+import Song from './components/Song';
+import './styles/app.scss';
+import songLibrary from './Util';
 
 function App() {
+  const songs = songLibrary();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Song activeSong={songs.filter((e) => e.active === true)} />
+      <Player activeSong={songs.filter((e) => e.active === true)} />
     </div>
   );
 }
+
 
 export default App;
