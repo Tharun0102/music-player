@@ -3,10 +3,13 @@
     margin:0;
     box-sizing: border-box;
 }
-.App{
+.app{
     display:flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 @import './player';
 @import './song';
+@import './library';
+@import './librarySong';

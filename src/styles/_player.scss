@@ -1,23 +1,21 @@
 .player-container{
     min-height: 20vh;
-    width:50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:center;
 }
 .timer-controls{
-    width:70%;
-    background-color: aqua;
+    background-color:wheat;
     display:flex;
     align-items: center;
     justify-content: space-between;
     input{
-        width:100%;
-        padding:1rem 2rem;
+        border:20px solid red;
+        background-color: aquamarine;
     }
     p{
-        padding:1rem;
+        width:100%;
     }
 }
 .play-controls{
@@ -27,5 +25,7 @@
     justify-content: space-between;
     svg{
         cursor:pointer;
+        width:50px;
+        height:50px;
     }
 }

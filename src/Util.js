@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-function songLibrary() {
+function LibraryState() {
     return [
         {
             name: "Flashback",
@@ -29,5 +29,5 @@ function songLibrary() {
     ]
 }
 
-export default songLibrary;
+export default LibraryState;
 

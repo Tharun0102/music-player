@@ -1,8 +1,7 @@
 import React from 'react';
 
 const Song = ({ activeSong }) => {
-    const songInfo = activeSong[0];
-    const { name, artist, cover } = songInfo;
+    const { name, artist, cover } = activeSong;
     return (
         <div className="song-container">
             <div className="song-cover">

@@ -1,14 +1,19 @@
 import Player from './components/Player';
 import Song from './components/Song';
 import './styles/app.scss';
-import songLibrary from './Util';
+import LibraryState from './Util';
+import Library from './components/Library';
+import { useState } from 'react';
+import LibrarySong from './components/LibrarySong';
 
 function App() {
-  const songs = songLibrary();
+  const [songs, setSongs] = useState(LibraryState());
+  const [currentSong, setCurrentSong] = useState(songs[0]);
   return (
-    <div className="App">
-      <Song activeSong={songs.filter((e) => e.active === true)} />
-      <Player activeSong={songs.filter((e) => e.active === true)} />
+    <div className="app">
+      <Song activeSong={currentSong} />
+      <Player activeSong={currentSong} />
+      <Library songs={songs} />
     </div>
   );
 }
