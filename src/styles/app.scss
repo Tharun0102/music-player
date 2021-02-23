@@ -9,7 +9,15 @@
     align-items: center;
     justify-content: center;
 }
+
+*{
+    font-family: 'Lato', sans-serif;
+}
+h4,h3{
+    font-weight: 400
+}
 @import './player';
 @import './song';
 @import './library';
 @import './librarySong';
+@import './nav';

@@ -1,15 +1,25 @@
 import React from 'react';
 import LibrarySong from './LibrarySong';
-import { v4 as uuidv4 } from 'uuid';
 
-const Library = ({ songs }) => {
-  console.log(songs);
+const Library = ({ songs, setSongs, setCurrentSong, isPlaying, setIsPlaying, audioElement, libraryState }) => {
   return (
-    <div className="library">
+    <div className={`library ${libraryState ? "active" : ""}`}>
+      <h2>Library</h2>
       <div className="library-songs">
         {
           songs.map((song) => {
-            return <LibrarySong song={song} key={uuidv4()} />
+            return (
+              <LibrarySong
+                songs={songs}
+                setSongs={setSongs}
+                setCurrentSong={setCurrentSong}
+                song={song}
+                key={song.id}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                audioElement={audioElement}
+              />
+            );
           })
         }
       </div>

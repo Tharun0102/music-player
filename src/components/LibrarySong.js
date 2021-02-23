@@ -1,8 +1,28 @@
 import React from 'react';
+import playAudio from '../PlayAudio';
+const LibrarySong = ({ songs, setSongs, setCurrentSong, song, isPlaying, setIsPlaying, audioElement }) => {
+    const songClickHandler = async (e) => {
+        setCurrentSong(song);
+        setIsPlaying(true);
+        setSongs(songs.map((s) => {
+            if (s.id === song.id) {
+                return {
+                    ...s,
+                    active: true
+                };
+            } else {
+                return {
+                    ...s,
+                    active: false
+                };
+            }
+        })
+        );
+        playAudio(true, audioElement);
+    }
 
-const LibrarySong = ({ song }) => {
     return (
-        <div className="library-song">
+        <div onClick={songClickHandler} className={`library-song ${song.active ? "active" : ""}`}>
             <div className="song-left">
                 <img src={song.cover} alt={"A song"} />
             </div>
