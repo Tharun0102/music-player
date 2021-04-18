@@ -5,31 +5,72 @@
     flex-direction: column;
     align-items: center;
     justify-content:center;
-}
-.timer-controls{
-    width:50%;
-    padding:1rem;
-    background-color:wheat;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    input{
-        border:20px solid red;
-        background-color: aquamarine;
+    .timer-controls{
+        width:70%;
+        padding:1rem;
+        background-color:wheat;
+        display:flex;
+        align-items: center;
+        input{
+            padding:0;
+            margin: 0;;
+            width:100%;
+            background: transparent;
+            -moz-appearance: none;
+            cursor:pointer;
+        }
+        p{
+            width: 100%;
+            padding:1rem;
+        }
     }
-    p{
-        size:2x;
-        width:100%;
+    .play-controls{
+        width:50%;
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        padding:1rem;
+        svg{
+            cursor:pointer;
+        }
     }
 }
-.play-controls{
-    width:50%;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    svg{
-        cursor:pointer;
-        width:50px;
-        height:50px;
+
+.track{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width:100%;
+    background: aqua;
+    position:relative;
+    overflow: hidden;
+}
+// .track-helper{
+//     background: rgb(200,200,200);
+//     height:100%;
+//     width:100%;
+//     position:absolute;
+//     top:0;
+//     left:0;
+//     transform: translateX(50%);
+// }
+
+input[type='range']::-webkit-slider-thumb{
+    -webkit-appearance: none;
+
+}
+input[type='range']::-moz-placeholder{
+    -moz-appearance: none;
+    height:16px;
+    width:16px;
+    background:black;
+}
+
+@media screen and (max-width: 768px){
+    .timer-controls{
+        width:90%;
+    }
+    .play-controls{
+        width:80%;
     }
 }

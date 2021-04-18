@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
-import playAudio from '../PlayAudio';
 
-const Player = ({ songs, currentSong, setCurrentSong, isPlaying, setIsPlaying, audioElement, setSongs }) => {
+const Player = ({ setPlayButtonActive, songs, songInfo, setSongInfo, currentSong, setCurrentSong, isPlaying, setIsPlaying, audioElement, setSongs }) => {
 
   useEffect(() => {
     setSongs(songs.map((s) => {
@@ -22,17 +21,16 @@ const Player = ({ songs, currentSong, setCurrentSong, isPlaying, setIsPlaying, a
     );
   }, [currentSong, setSongs]);
 
-  const [songInfo, setSongInfo] = useState({
-    currentTime: "00 : 00",
-    duration: "0"
-  });
+
 
   const { audio } = currentSong;
-  const playHandler = () => {
+  const playHandler = (e) => {
     if (isPlaying) {
+      setPlayButtonActive(false);
       audioElement.current.pause();
       setIsPlaying(!isPlaying);
     } else {
+      setPlayButtonActive(true);
       audioElement.current.play();
       setIsPlaying(!isPlaying);
     }
@@ -40,9 +38,11 @@ const Player = ({ songs, currentSong, setCurrentSong, isPlaying, setIsPlaying, a
   const timeUpdateHandler = (e) => {
     const time = e.target.currentTime;
     const duration = e.target.duration;
+    const percentage = Math.round((Math.round(time) / Math.round(duration)) * 100)
     setSongInfo({
       currentTime: time,
-      duration: (duration)
+      duration: duration,
+      percentage: percentage
     });
   }
   const getTime = (time) => {
@@ -57,31 +57,41 @@ const Player = ({ songs, currentSong, setCurrentSong, isPlaying, setIsPlaying, a
       currentTime: e.target.value
     });
   }
-  const skipBackHandler = () => {
+  const skipBackHandler = async () => {
     const currentIndex = songs.findIndex((s) => s.id === currentSong.id);
     if ((currentIndex - 1) % songs.length === -1) {
-      setCurrentSong(songs[songs.length - 1]);
+      await setCurrentSong(songs[songs.length - 1]);
     } else {
-      setCurrentSong(songs[(currentIndex - 1) % songs.length]);
+      await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
     }
-    playAudio(isPlaying, audioElement);
+    if (isPlaying) audioElement.current.play();
   }
-  const skipForwardHandler = () => {
+  const skipForwardHandler = async () => {
     const currentIndex = songs.findIndex((s) => s.id === currentSong.id);
-    setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    playAudio(isPlaying, audioElement);
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+    if (isPlaying) audioElement.current.play();
+  }
+  const songEndHandler = skipForwardHandler;
+
+  //styles
+  const track_style = {
+    transform: `translateX(${songInfo.percentage}%)`
   }
   return (
     <div className="player-container">
       <div className="timer-controls">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input
-          onChange={inputDragHandler}
-          min={0}
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          type="range"
-        />
+        <div style={{ backgroundColor: 'white' }} className="track">
+          <input
+            onChange={inputDragHandler}
+            min={0}
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            type="range"
+          />
+          <div style={track_style} className="track-helper"></div>
+        </div>
+
         <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-controls">
@@ -108,7 +118,9 @@ const Player = ({ songs, currentSong, setCurrentSong, isPlaying, setIsPlaying, a
         onTimeUpdate={timeUpdateHandler}
         onLoadedMetadata={timeUpdateHandler}
         ref={audioElement}
-        src={audio} />
+        src={audio}
+        onEnded={songEndHandler}
+      />
     </div>
   );
 }
