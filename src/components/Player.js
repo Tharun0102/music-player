@@ -80,7 +80,7 @@ const Player = ({ setPlayButtonActive, songs, songInfo, setSongInfo, currentSong
   return (
     <div className="player-container">
       <div className="timer-controls">
-        <p>{getTime(songInfo.currentTime)}</p>
+        <p className="start-time">{getTime(songInfo.currentTime)}</p>
         <div style={{ backgroundColor: 'white' }} className="track">
           <input
             onChange={inputDragHandler}
@@ -92,7 +92,7 @@ const Player = ({ setPlayButtonActive, songs, songInfo, setSongInfo, currentSong
           <div style={track_style} className="track-helper"></div>
         </div>
 
-        <p>{getTime(songInfo.duration)}</p>
+        <p className="end-time">{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-controls">
         <FontAwesomeIcon
