@@ -9,9 +9,37 @@
     transform: translateX(-100%);
     transition: all 0.5s ease;
     opacity: 0;
-    h2{
-        padding:1rem;
-    }
+    .lib-title{
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        h2{
+            flex-grow: 8;
+            margin:1rem;
+            padding-bottom: .1rem;
+            user-select: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .cancel-option{
+            padding-bottom: .1rem;
+            flex-grow: 2;
+            display: block;
+            :nth-child(1){
+                background-color: black;
+                display: block;
+                width: 30px;
+                height: 4px;
+                transform: rotate(45deg) translate(3px, -1px);
+            }
+            :nth-child(2){
+                background-color: black;
+                display: block;
+                width: 30px;
+                height: 4px;
+                transform: rotate(-45deg) translate(4px);
+            }
+        }
+    }    
 }
 .lib-active{
     background-color: rgb(157, 238, 207);
@@ -50,3 +78,4 @@
 
 }
 ::-moz-range-progress { /* Styles the progress/fill below the thumb of the input*/ }
+

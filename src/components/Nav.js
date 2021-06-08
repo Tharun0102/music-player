@@ -8,7 +8,7 @@ const Nav = ({ libraryState, setLibraryState }) => {
     }
     return (
         <nav className="nav">
-            <h1>MUSIC-PLAYER</h1>
+            <h1 style={{ userSelect: "none" }}>MUSIC-PLAYER</h1>
             <button onClick={libraryStateHandler}>
                 Library
                 <FontAwesomeIcon

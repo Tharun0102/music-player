@@ -65,11 +65,11 @@ input[type='range']::-moz-placeholder{
     background:black;
 }
 
-@media  (max-width: 768px){
-    .timer-controls{
-        width:100%;
+@media screen and (max-width: 768px){
+    .player-container{
+        width:95%;
     }
-    .play-controls{
-        width:100%;
+    .timer-controls{
+        width: 100%;
     }
 }

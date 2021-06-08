@@ -43,6 +43,7 @@ function App() {
         setIsPlaying={setIsPlaying}
         audioElement={audioElement}
         libraryState={libraryState}
+        setLibraryState={setLibraryState}
       />
     </div>
   );
